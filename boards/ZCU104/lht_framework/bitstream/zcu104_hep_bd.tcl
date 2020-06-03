@@ -231,10 +231,6 @@ proc create_root_design { parentCell } {
    CONFIG.PSU_MIO_0_DIRECTION {out} \
    CONFIG.PSU_MIO_0_INPUT_TYPE {cmos} \
    CONFIG.PSU_MIO_0_POLARITY {Default} \
-   CONFIG.PSU_MIO_10_POLARITY {Default} \
-   CONFIG.PSU_MIO_11_POLARITY {Default} \
-   CONFIG.PSU_MIO_12_INPUT_TYPE {cmos} \
-   CONFIG.PSU_MIO_12_POLARITY {Default} \
    CONFIG.PSU_MIO_16_DIRECTION {inout} \
    CONFIG.PSU_MIO_16_POLARITY {Default} \
    CONFIG.PSU_MIO_17_DIRECTION {inout} \
@@ -383,10 +379,6 @@ proc create_root_design { parentCell } {
    CONFIG.PSU_MIO_76_POLARITY {Default} \
    CONFIG.PSU_MIO_77_DIRECTION {inout} \
    CONFIG.PSU_MIO_77_POLARITY {Default} \
-   CONFIG.PSU_MIO_7_INPUT_TYPE {cmos} \
-   CONFIG.PSU_MIO_7_POLARITY {Default} \
-   CONFIG.PSU_MIO_8_POLARITY {Default} \
-   CONFIG.PSU_MIO_9_POLARITY {Default} \
    CONFIG.PSU_MIO_TREE_PERIPHERALS {Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#Feedback Clk##########I2C 1#I2C 1#UART 0#UART 0#UART 1#UART 1###CAN 1#CAN 1##DPAUX#DPAUX#DPAUX#DPAUX###############SD 1#SD 1#SD 1#SD 1#SD 1#SD 1#SD 1#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#Gem 3#Gem 3#Gem 3#Gem 3#Gem 3#Gem 3#Gem 3#Gem 3#Gem 3#Gem 3#Gem 3#Gem 3#MDIO 3#MDIO 3} \
    CONFIG.PSU_MIO_TREE_SIGNALS {sclk_out#miso_mo1#mo2#mo3#mosi_mi0#n_ss_out#clk_for_lpbk##########scl_out#sda_out#rxd#txd#txd#rxd###phy_tx#phy_rx##dp_aux_data_out#dp_hot_plug_detect#dp_aux_data_oe#dp_aux_data_in###############sdio1_cd_n#sdio1_data_out[0]#sdio1_data_out[1]#sdio1_data_out[2]#sdio1_data_out[3]#sdio1_cmd_out#sdio1_clk_out#ulpi_clk_in#ulpi_dir#ulpi_tx_data[2]#ulpi_nxt#ulpi_tx_data[0]#ulpi_tx_data[1]#ulpi_stp#ulpi_tx_data[3]#ulpi_tx_data[4]#ulpi_tx_data[5]#ulpi_tx_data[6]#ulpi_tx_data[7]#rgmii_tx_clk#rgmii_txd[0]#rgmii_txd[1]#rgmii_txd[2]#rgmii_txd[3]#rgmii_tx_ctl#rgmii_rx_clk#rgmii_rxd[0]#rgmii_rxd[1]#rgmii_rxd[2]#rgmii_rxd[3]#rgmii_rx_ctl#gem3_mdc#gem3_mdio_out} \
    CONFIG.PSU_SD1_INTERNAL_BUS_WIDTH {4} \

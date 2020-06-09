@@ -18,7 +18,7 @@ The following steps will open a demonstration notebook for the HEP, which analys
 * Load an SD Card with an image of PYNQ v2.5 loaded.
 * Launch PYNQ v2.5 on the ZCU104 development board.
 * Ensure that you have access to an internet connection from PYNQ.
-* Open a Jupyter Lab session by navigating to http://<pynq-ip-address>:9090/lab in a standard web browser (preferably Google Chrome).
+* Open a Jupyter Lab session by navigating to http://\<pynq-ip-address\>:9090/lab in a standard web browser (preferably Google Chrome).
 * In the Launcher tab, select Terminal to open a new command window.
 * Run the following line of code to download the demonstration notebook.
 ```sh

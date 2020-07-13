@@ -34,9 +34,11 @@ Launch MATLAB R2019a and setup the HDL toolpath to Vivado 2019.1. To do this, yo
 ```sh
 hdlsetuptoolpath('ToolName','Xilinx Vivado','ToolPath','<vivado-installation-directory>Xilinx/Vivado/2019.1/bin')
 ```
-In MATLAB, use the folder explorer to navigate to the directory where you cloned the _lht_framework_ repository. Add the folder named _ZynqCustom_ to the MATLAB path by running the following line of code in the command window.
+In MATLAB, use the folder explorer to navigate to the directory where you cloned the _lht_framework_ repository. Add the folder named _ZynqCustom_ to the MATLAB path by running the following lines of code in the command window.
 ```sh
 addpath([pwd,'\ZynqCustom'])
+addpath([pwd,'\src'])
+addpath([pwd,'\img'])
 ```
 Navigate into the _Template_ folder and open the Simulink model named _ZCU104_HEP_Template_. In this Simulink model you will be able to modify the Design Under Test (DUT) block in the centre to include your own LHT architecture. The _AXI-Stream Image Input_ and _AXI-Stream Image Output_ blocks can help you interface data to and from the MATLAB workspace. The reference design uses the AXI-Stream interface to transfer data to and from the DUT block. The _tvalid_ signal indicates the presence of valid data, _tdata_ is used to transfer image data, and _tlast_ specifies the last data beat in the transfer.
 

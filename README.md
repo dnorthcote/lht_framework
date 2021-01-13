@@ -1,6 +1,8 @@
 <img src="https://www.strath.ac.uk/media/1newwebsite/webteam/logos/xUoS_Logo_Horizontal.png.pagespeed.ic.M6gv_BmDx1.png" width="350">
 
 # A Hough Evaluation Platform with PYNQ and Mathworks' HDL Coder
+See the corresponding publication [here](https://pureportal.strath.ac.uk/en/publications/a-pynq-evaluation-platform-for-fpga-architectures-of-the-line-hou).
+
 This repository contains a [PYNQ](http://www.pynq.io/) (Python Productivity for Zynq) evaluation platform for Field Programmable Gate Array (FPGA) architectures of the Line Hough Transform (LHT). This system is named the Hough Evaluation Platform (HEP). The HEP can calculate the time taken to apply the LHT to an image using a custom FPGA architecture and is capable of inspecting the Hough Parameter Space (HPS) using PYNQ's signal tracing and visualisation capbilities. The HEP can also calculate a new quantitative measurement for analysing the HPSs produced from different LHT architectures. This measurement is named the Peak-to-Mean Vote Ratio (PMVR) and is useful for quantifying the ability to reliably extract and separate peaks in the HPS from other neighbouring locations.
 
 <p align="center">

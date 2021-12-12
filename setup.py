@@ -39,9 +39,9 @@ copy_notebooks()
 
 setup(
     name="lht_framework",
-    version='1.1',
+    version='1.2',
     install_requires=[
-        'pynq>=2.6',
+        'pynq>=2.7',
     ],
     url='https://github.com/dnorthcote/lht_framework',
     license='BSD 3-Clause License',

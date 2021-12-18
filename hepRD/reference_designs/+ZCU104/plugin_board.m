@@ -3,7 +3,6 @@ function hB = plugin_board()
 
 % Construct board object
 hB = hdlcoder.Board;
-
 hB.BoardName    = 'ZCU104 Development Board';
 
 % FPGA device information

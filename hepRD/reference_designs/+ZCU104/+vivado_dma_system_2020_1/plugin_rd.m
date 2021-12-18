@@ -16,7 +16,7 @@ hRD.addParameter( ...
     'DefaultValue',  '192.168.2.99');
 
 % Remove option for HDL Verifier
-hRD.AddJTAGMATLABasAXIMasterParameter = 'false';
+hRD.AddJTAGMATLABasAXIMasterParameter = false;
 hRD.JTAGMATLABasAXIMasterDefaultValue = 'off';
 
 % Remove option for "Generate Software Interface Model"

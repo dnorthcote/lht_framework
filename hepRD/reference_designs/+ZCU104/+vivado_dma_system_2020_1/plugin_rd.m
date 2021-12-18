@@ -16,8 +16,8 @@ hRD.addParameter( ...
     'DefaultValue',  '192.168.2.99');
 
 % Remove option for HDL Verifier
-%hRD.AddJTAGMATLABasAXIMasterParameter = 'false';
-%hRD.JTAGMATLABasAXIMasterDefaultValue = 'off';
+hRD.AddJTAGMATLABasAXIMasterParameter = 'false';
+hRD.JTAGMATLABasAXIMasterDefaultValue = 'off';
 
 % Remove option for "Generate Software Interface Model"
 hRD.EmbeddedCoderSupportPackage = hdlcoder.EmbeddedCoderSupportPackage.None;
@@ -63,9 +63,5 @@ hRD.addAXI4StreamInterface( ...
 %% Custom Callback Functions
 hRD.CallbackCustomProgrammingMethod = ...
     @ZCU104.vivado_dma_system_2020_1.callback_CustomProgrammingMethod;
-
-%% Remove option for "Generate Software Interface Model"
-hRD.EmbeddedCoderSupportPackage = ...
-    hdlcoder.EmbeddedCoderSupportPackage.None;
 
 end

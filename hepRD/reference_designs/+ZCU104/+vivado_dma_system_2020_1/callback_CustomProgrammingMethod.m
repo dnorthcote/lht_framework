@@ -15,10 +15,48 @@ function [status, log] = callback_CustomProgrammingMethod(infoStruct)
 %         status == true means process run successfully
 %         status == false means process run failed
 % log:    output log string
-web(['http://', infoStruct.ParameterStruct.IPAddress, ':9090'])
 
+% Set unsuccessful status.
+status = false;
+
+% Set IP Address and open default browser
+ipAddress = infoStruct.ParameterStruct.IPAddress;
+web(['http://', ipAddress, ':9090/lab'])
+
+% Set date and time and correct format for folder directory
+dt = datetime;
+dt.Format = 'ddMMyy_ssmmHH';
+
+% Make Jupyter working directory
+plinkCmd = "plink -ssh xilinx@" + string(ipAddress) + " -pw xilinx ";
+mkdirCmd = "mkdir -p /home/xilinx/jupyter_notebooks/hep/" + string(dt);
+system(plinkCmd + mkdirCmd);
+
+% Transfer bitstream file
+bitstreamDir = fullfile(pwd, infoStruct.ToolProjectFolder, ...
+    'vivado_prj.runs','impl_1','zcu104_hep_wrapper.bit');
+pscpBitCmd = "pscp -pw xilinx " + bitstreamDir + " xilinx@" + ipAddress ...
+    + ":/home/xilinx/jupyter_notebooks/hep/" + string(dt);
+system(pscpBitCmd);
+
+% Transfer driver files and notebook
+driverDir = replace(mfilename('fullpath'), ...
+    'callback_CustomProgrammingMethod', 'drivers\');
+dirContents = dir(driverDir);
+for idx = 1:length(dirContents)
+    file = dirContents(idx);
+    pscpDriverCmd = "pscp -pw xilinx " + driverDir + file.name + ...
+        " xilinx@" + ipAddress + ":/home/xilinx/jupyter_notebooks/hep/" ...
+        + string(dt);
+    if contains(file.name, '.py') || contains(file.name, 'ipynb')
+        system(pscpDriverCmd);
+    end
+
+% Report information to user
+log = [newline, 'A browser window has opened at the IP Address.', ...
+       newline, 'Design files have been uploaded to this folder:', ...
+       strcat('/home/xilinx/jupyter_notebooks/hep/', string(dt))];
+  
+% Set successful status
 status = true;
-log = [newline, 'A browser window will have opened at the specified IP Address. Upload the Bitstream and hwh files from this project to PYNQ.'];
-% Enter your commands for custom programming here
-
 end

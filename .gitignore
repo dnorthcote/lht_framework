@@ -28,3 +28,4 @@
 
 # Ignore ./workspace
 *\workspace
+*.r2019a

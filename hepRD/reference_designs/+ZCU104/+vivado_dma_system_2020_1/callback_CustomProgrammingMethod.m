@@ -39,6 +39,13 @@ pscpBitCmd = "pscp -pw xilinx " + bitstreamDir + " xilinx@" + ipAddress ...
     + ":/home/xilinx/jupyter_notebooks/hep/" + string(dt);
 system(pscpBitCmd);
 
+% Transfer hardware handoff file
+hwhDir = fullfile(pwd, infoStruct.ToolProjectFolder, 'vivado_prj.srcs', ...
+    'sources_1', 'bd', 'zcu104_hep', 'hw_handoff', 'zcu104_hep.hwh');
+pscpHwhCmd = "pscp -pw xilinx " + hwhDir + " xilinx@" + ipAddress ...
+    + ":/home/xilinx/jupyter_notebooks/hep/" + string(dt);
+system(pscpHwhCmd);
+
 % Transfer driver files and notebook
 driverDir = replace(mfilename('fullpath'), ...
     'callback_CustomProgrammingMethod', 'drivers\');

@@ -51,6 +51,7 @@ for idx = 1:length(dirContents)
     if contains(file.name, '.py') || contains(file.name, 'ipynb')
         system(pscpDriverCmd);
     end
+end
 
 % Report information to user
 log = [newline, 'A browser window has opened at the IP Address.', ...

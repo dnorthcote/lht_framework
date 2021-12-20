@@ -34,28 +34,47 @@ class HoughEvaluation(Overlay):
         super().__init__(bitfile_name, **kwargs)
         
         # Set system parameters
-        self.width = width
-        self.height = height
-        self.frequency = frequency
-        self.drho = drho
-        self.dtheta = dtheta
-        self.nrho = int(np.ceil(np.sqrt(
+        self._width = width
+        self._height = height
+        self._frequency = frequency
+        self._drho = drho
+        self._dtheta = dtheta
+        self._nrho = int(np.ceil(np.sqrt(
             (self.width/2)**2 + \
             (self.height/2)**2))*2/self.drho)
-        self.ntheta = np.size(np.arange(0,180,self.dtheta))
+        self._ntheta = np.size(np.arange(0,180,self.dtheta))
         
         # Initialise performance output
-        self.time = 0
+        self._time = 0
         
         # Extract ipcore from the overlay with friendly name
         self.hpa = self.hpa_module
-        self.hpa.frequency = self.frequency
         
         # Set up dma buffers
-        self.inarray = allocate(shape=(self.height, self.width),
+        self._inarray = allocate(shape=(self._height, self._width),
                                 dtype=np.uint32)
-        self.outarray = allocate(shape=(self.ntheta, self.nrho),
+        self._outarray = allocate(shape=(self._ntheta, self._nrho),
                                  dtype=np.uint32)
+
+    @property
+    def width(self):
+        return self._width
+
+    @property
+    def height(self):
+        return self._height
+
+    @property
+    def frequency(self):
+        return self._frequency
+
+    @property
+    def drho(self):
+        return self._drho
+
+    @property
+    def dtheta(self):
+        return self._dtheta
         
     def imread(self, imgfile_name='chessboard.jpg'):
         """Returns an image resized to the architecture requirements.
@@ -91,24 +110,24 @@ class HoughEvaluation(Overlay):
         """Returns the HPS for an input edge image.
         edge: The input edge image.
         """
-        self.inarray[:, :] = np.array(edge,
+        self._inarray[:, :] = np.array(edge,
                                       dtype=np.uint32)[:, :]
-        self.axi_dma.recvchannel.transfer(self.outarray)
-        self.axi_dma.sendchannel.transfer(self.inarray)
+        self.axi_dma.recvchannel.transfer(self._outarray)
+        self.axi_dma.sendchannel.transfer(self._inarray)
         self.axi_dma.sendchannel.wait()
         self.axi_dma.recvchannel.wait()
         self.time = self.hpa.clock_cycles/self.frequency
         self.hpa.reset = 1
         self.hpa.reset = 0
-        return np.array(self.outarray, dtype=np.uint32)
+        return np.array(self._outarray, dtype=np.uint32)
     
     def plotSurface(self, hps):
         """Returns a plotly figure handle of the HPS surface.
         hps: The HPS to be plotted.
         """
         data = [go.Surface(z=hps,
-                           x=np.arange(-int(self.nrho/2),
-                                       int(self.nrho/2), 1),
+                           x=np.arange(-int(self._nrho/2),
+                                       int(self._nrho/2), 1),
                            colorscale='Jet')]
         layout = go.Layout(
             title='Hough Parameter Space (Surface)',
@@ -138,8 +157,8 @@ class HoughEvaluation(Overlay):
         hps: The HPS to be plotted.
         """
         data = [go.Heatmap(z=hps.transpose(),
-                           y=np.arange(-int(self.nrho/2),
-                                       int(self.nrho/2), 1),
+                           y=np.arange(-int(self._nrho/2),
+                                       int(self._nrho/2), 1),
                            colorscale='Jet')]
         layout = go.Layout(
             title='Hough Parameter Space (Heatmap)',

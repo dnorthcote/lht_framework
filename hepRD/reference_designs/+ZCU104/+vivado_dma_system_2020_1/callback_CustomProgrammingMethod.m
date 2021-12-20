@@ -36,7 +36,7 @@ system(plinkCmd + mkdirCmd);
 bitstreamDir = fullfile(pwd, infoStruct.ToolProjectFolder, ...
     'vivado_prj.runs','impl_1','zcu104_hep_wrapper.bit');
 pscpBitCmd = "pscp -pw xilinx " + bitstreamDir + " xilinx@" + ipAddress ...
-    + ":/home/xilinx/jupyter_notebooks/hep/" + string(dt);
+    +":/home/xilinx/jupyter_notebooks/hep/"+string(dt)+"/zcu104_hep.bit";
 system(pscpBitCmd);
 
 % Transfer hardware handoff file
@@ -55,7 +55,8 @@ for idx = 1:length(dirContents)
     pscpDriverCmd = "pscp -pw xilinx " + driverDir + file.name + ...
         " xilinx@" + ipAddress + ":/home/xilinx/jupyter_notebooks/hep/" ...
         + string(dt);
-    if contains(file.name, '.py') || contains(file.name, 'ipynb')
+    if contains(file.name, '.py') || contains(file.name, '.ipynb') || ...
+        contains(file.name, '.jpg')
         system(pscpDriverCmd);
     end
 end

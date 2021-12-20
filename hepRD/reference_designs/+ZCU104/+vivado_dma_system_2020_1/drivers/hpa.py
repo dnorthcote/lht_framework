@@ -1,33 +1,42 @@
+# PYNQ Libraries
 from pynq import DefaultIP
-from pynq import DefaultHierarchy
 
+# Python Libraries
 from time import sleep
 
 class HoughPerformance(DefaultIP):
-    """Driver for Hough Performance Analyser core logic IP
-    Exposes all the configuration registers by name via data-driven properties
+    """Driver for Hough Performance Analyser core logic IP.
     """
     
     def __init__(self, description):
+        """Construct a HoughPerformance object for
+        controlling the HPA IP core.
+        """
         super().__init__(description=description)
+    
+    @property
+    def reset(self):
+        """Returns the reset register value.
+        """
+        return self.read(256)
+    
+    @reset.setter
+    def reset(self, reset):
+        """Sets the reset register value.
+        """
+        self.write(256, reset)
         
-    bindto = ['xilinx.com:ip:hpa_module:1.0']
+    @property
+    def clock_cycles(self):
+        """Returns the clock_cycles register value.
+        """
+        return self.read(260)
+        
+    @property
+    def overflow(self):
+        """Returns the overflow register value.
+        """
+        return self.read(264)
     
+    bindto = ['xilinx.com:ip:hpa_module:1.2']
     
-# LUT of property addresses for our data-driven properties
-_houghperformance_props = [("frequency", 256), ("reset", 260), ("seconds", 264), ("fraction", 268), ("pmvr_nonzero", 272), ("pmvr_sum", 276)]
-
-# Func to return a MMIO getter and setter based on a relative addr
-def _create_mmio_property(addr):
-    def _get(self):
-        return self.read(addr)
-
-    def _set(self, value):
-        self.write(addr, value)
-
-    return property(_get, _set)
-
-
-# Generate getters and setters based on _houghperformance_props
-for (name, addr) in _houghperformance_props:
-    setattr(HoughPerformance, name, _create_mmio_property(addr))

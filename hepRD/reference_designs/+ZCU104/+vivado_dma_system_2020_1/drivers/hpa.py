@@ -1,9 +1,6 @@
 # PYNQ Libraries
 from pynq import DefaultIP
 
-# Python Libraries
-from time import sleep
-
 class HoughPerformance(DefaultIP):
     """Driver for Hough Performance Analyser core logic IP.
     """

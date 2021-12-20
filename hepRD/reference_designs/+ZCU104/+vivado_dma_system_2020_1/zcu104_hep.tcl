@@ -236,8 +236,8 @@ proc create_root_design { parentCell } {
    CONFIG.RESET_TYPE {ACTIVE_LOW} \
  ] $clk_wiz
 
-  # Create instance: hpa_module_0, and set properties
-  set hpa_module_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:hpa_module:1.2 hpa_module_0 ]
+  # Create instance: hpa_module, and set properties
+  set hpa_module [ create_bd_cell -type ip -vlnv xilinx.com:ip:hpa_module:1.2 hpa_module ]
 
   # Create instance: proc_sys_reset_clk_wiz, and set properties
   set proc_sys_reset_clk_wiz [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_clk_wiz ]
@@ -1689,12 +1689,12 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net axi_dma_M_AXI_MM2S [get_bd_intf_pins axi_dma/M_AXI_MM2S] [get_bd_intf_pins axi_smc/S00_AXI]
   connect_bd_intf_net -intf_net axi_dma_M_AXI_S2MM [get_bd_intf_pins axi_dma/M_AXI_S2MM] [get_bd_intf_pins axi_smc/S01_AXI]
   connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins axi_smc/M00_AXI] [get_bd_intf_pins zynq_ultra_ps_e/S_AXI_HP2_FPD]
-  connect_bd_intf_net -intf_net axis_broadcaster_mm2s_M01_AXIS [get_bd_intf_pins axis_broadcaster_mm2s/M01_AXIS] [get_bd_intf_pins hpa_module_0/s_img_axis]
+  connect_bd_intf_net -intf_net axis_broadcaster_mm2s_M01_AXIS [get_bd_intf_pins axis_broadcaster_mm2s/M01_AXIS] [get_bd_intf_pins hpa_module/s_img_axis]
   connect_bd_intf_net -intf_net axis_broadcaster_s2mm_M00_AXIS [get_bd_intf_pins axi_dma/S_AXIS_S2MM] [get_bd_intf_pins axis_broadcaster_s2mm/M00_AXIS]
-  connect_bd_intf_net -intf_net axis_broadcaster_s2mm_M01_AXIS [get_bd_intf_pins axis_broadcaster_s2mm/M01_AXIS] [get_bd_intf_pins hpa_module_0/s_hps_axis]
+  connect_bd_intf_net -intf_net axis_broadcaster_s2mm_M01_AXIS [get_bd_intf_pins axis_broadcaster_s2mm/M01_AXIS] [get_bd_intf_pins hpa_module/s_hps_axis]
   connect_bd_intf_net -intf_net ps8_0_axi_periph_M00_AXI [get_bd_intf_pins axi_dma/S_AXI_LITE] [get_bd_intf_pins ps8_0_axi_periph/M00_AXI]
   connect_bd_intf_net -intf_net ps8_0_axi_periph_M01_AXI [get_bd_intf_pins axi_intc/s_axi] [get_bd_intf_pins ps8_0_axi_periph/M01_AXI]
-  connect_bd_intf_net -intf_net ps8_0_axi_periph_M02_AXI [get_bd_intf_pins hpa_module_0/AXI4_Lite] [get_bd_intf_pins ps8_0_axi_periph/M02_AXI]
+  connect_bd_intf_net -intf_net ps8_0_axi_periph_M02_AXI [get_bd_intf_pins hpa_module/AXI4_Lite] [get_bd_intf_pins ps8_0_axi_periph/M02_AXI]
   connect_bd_intf_net -intf_net zynq_ultra_ps_e_0_M_AXI_HPM0_FPD [get_bd_intf_pins ps8_0_axi_periph/S00_AXI] [get_bd_intf_pins zynq_ultra_ps_e/M_AXI_HPM0_FPD]
 
   # Create port connections
@@ -1704,9 +1704,9 @@ proc create_root_design { parentCell } {
   connect_bd_net -net axi_intc_irq [get_bd_pins axi_intc/irq] [get_bd_pins zynq_ultra_ps_e/pl_ps_irq0]
   connect_bd_net -net clk_wiz_locked [get_bd_pins clk_wiz/locked] [get_bd_pins proc_sys_reset_clk_wiz/dcm_locked]
   connect_bd_net -net proc_sys_reset_pl_clk0_peripheral_aresetn [get_bd_pins clk_wiz/resetn] [get_bd_pins proc_sys_reset_pl_clk0/peripheral_aresetn]
-  connect_bd_net -net rst_ps8_0_250M_peripheral_aresetn [get_bd_pins axi_dma/axi_resetn] [get_bd_pins axi_intc/s_axi_aresetn] [get_bd_pins axi_smc/aresetn] [get_bd_pins axis_broadcaster_mm2s/aresetn] [get_bd_pins axis_broadcaster_s2mm/aresetn] [get_bd_pins hpa_module_0/AXI4_Lite_ARESETN] [get_bd_pins hpa_module_0/IPCORE_RESETN] [get_bd_pins proc_sys_reset_clk_wiz/peripheral_aresetn] [get_bd_pins ps8_0_axi_periph/ARESETN] [get_bd_pins ps8_0_axi_periph/M00_ARESETN] [get_bd_pins ps8_0_axi_periph/M01_ARESETN] [get_bd_pins ps8_0_axi_periph/M02_ARESETN] [get_bd_pins ps8_0_axi_periph/M03_ARESETN] [get_bd_pins ps8_0_axi_periph/S00_ARESETN]
+  connect_bd_net -net rst_ps8_0_250M_peripheral_aresetn [get_bd_pins axi_dma/axi_resetn] [get_bd_pins axi_intc/s_axi_aresetn] [get_bd_pins axi_smc/aresetn] [get_bd_pins axis_broadcaster_mm2s/aresetn] [get_bd_pins axis_broadcaster_s2mm/aresetn] [get_bd_pins hpa_module/AXI4_Lite_ARESETN] [get_bd_pins hpa_module/IPCORE_RESETN] [get_bd_pins proc_sys_reset_clk_wiz/peripheral_aresetn] [get_bd_pins ps8_0_axi_periph/ARESETN] [get_bd_pins ps8_0_axi_periph/M00_ARESETN] [get_bd_pins ps8_0_axi_periph/M01_ARESETN] [get_bd_pins ps8_0_axi_periph/M02_ARESETN] [get_bd_pins ps8_0_axi_periph/M03_ARESETN] [get_bd_pins ps8_0_axi_periph/S00_ARESETN]
   connect_bd_net -net xlconcat_0_dout [get_bd_pins axi_intc/intr] [get_bd_pins xlconcat/dout]
-  connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins axi_dma/m_axi_mm2s_aclk] [get_bd_pins axi_dma/m_axi_s2mm_aclk] [get_bd_pins axi_dma/s_axi_lite_aclk] [get_bd_pins axi_intc/s_axi_aclk] [get_bd_pins axi_smc/aclk] [get_bd_pins axis_broadcaster_mm2s/aclk] [get_bd_pins axis_broadcaster_s2mm/aclk] [get_bd_pins clk_wiz/clk_out1] [get_bd_pins hpa_module_0/AXI4_Lite_ACLK] [get_bd_pins hpa_module_0/IPCORE_CLK] [get_bd_pins proc_sys_reset_clk_wiz/slowest_sync_clk] [get_bd_pins ps8_0_axi_periph/ACLK] [get_bd_pins ps8_0_axi_periph/M00_ACLK] [get_bd_pins ps8_0_axi_periph/M01_ACLK] [get_bd_pins ps8_0_axi_periph/M02_ACLK] [get_bd_pins ps8_0_axi_periph/M03_ACLK] [get_bd_pins ps8_0_axi_periph/S00_ACLK] [get_bd_pins zynq_ultra_ps_e/maxihpm0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihp2_fpd_aclk]
+  connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins axi_dma/m_axi_mm2s_aclk] [get_bd_pins axi_dma/m_axi_s2mm_aclk] [get_bd_pins axi_dma/s_axi_lite_aclk] [get_bd_pins axi_intc/s_axi_aclk] [get_bd_pins axi_smc/aclk] [get_bd_pins axis_broadcaster_mm2s/aclk] [get_bd_pins axis_broadcaster_s2mm/aclk] [get_bd_pins clk_wiz/clk_out1] [get_bd_pins hpa_module/AXI4_Lite_ACLK] [get_bd_pins hpa_module/IPCORE_CLK] [get_bd_pins proc_sys_reset_clk_wiz/slowest_sync_clk] [get_bd_pins ps8_0_axi_periph/ACLK] [get_bd_pins ps8_0_axi_periph/M00_ACLK] [get_bd_pins ps8_0_axi_periph/M01_ACLK] [get_bd_pins ps8_0_axi_periph/M02_ACLK] [get_bd_pins ps8_0_axi_periph/M03_ACLK] [get_bd_pins ps8_0_axi_periph/S00_ACLK] [get_bd_pins zynq_ultra_ps_e/maxihpm0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihp2_fpd_aclk]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_resetn0 [get_bd_pins proc_sys_reset_clk_wiz/ext_reset_in] [get_bd_pins proc_sys_reset_pl_clk0/ext_reset_in] [get_bd_pins zynq_ultra_ps_e/pl_resetn0]
 
   # Create address segments
@@ -1718,7 +1718,7 @@ proc create_root_design { parentCell } {
   assign_bd_address -offset 0xC0000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces axi_dma/Data_S2MM] [get_bd_addr_segs zynq_ultra_ps_e/SAXIGP4/HP2_QSPI] -force
   assign_bd_address -offset 0xA0000000 -range 0x00001000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e/Data] [get_bd_addr_segs axi_dma/S_AXI_LITE/Reg] -force
   assign_bd_address -offset 0xA0001000 -range 0x00001000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e/Data] [get_bd_addr_segs axi_intc/S_AXI/Reg] -force
-  assign_bd_address -offset 0xA0010000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e/Data] [get_bd_addr_segs hpa_module_0/AXI4_Lite/reg0] -force
+  assign_bd_address -offset 0xA0010000 -range 0x00010000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e/Data] [get_bd_addr_segs hpa_module/AXI4_Lite/reg0] -force
 
 
   # Restore current instance

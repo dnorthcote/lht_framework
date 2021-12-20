@@ -48,7 +48,7 @@ class HoughEvaluation(Overlay):
         self.time = 0
         
         # Extract ipcore from the overlay with friendly name
-        self.hpa = self.hpa_module_0
+        self.hpa = self.hpa_module
         self.hpa.frequency = self.frequency
         
         # Set up dma buffers

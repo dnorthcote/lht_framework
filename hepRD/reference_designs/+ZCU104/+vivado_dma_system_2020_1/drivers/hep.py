@@ -172,5 +172,5 @@ class HoughEvaluation(Overlay):
         """Returns a PIL of an image.
         img: The image to display.
         """
-        return Image.fromarray(img)
+        return Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     

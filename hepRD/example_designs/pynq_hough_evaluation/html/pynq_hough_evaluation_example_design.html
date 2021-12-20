@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>PYNQ Hough Evaluation Platform Example Design</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-10"><meta name="DC.source" content="pynq_hough_evaluation_example_design.m"><style type="text/css">
+      --><title>PYNQ Hough Evaluation Platform Example Design</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-20"><meta name="DC.source" content="pynq_hough_evaluation_example_design.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -80,19 +80,20 @@ imshow(Ir);
 <span class="comment">% Get the edge image by comparing the image gradient to the Sobel threshold</span>
 <span class="comment">% set earlier.</span>
 [edge] = Sobel(Y, sobelThreshold);
-</pre><h2 id="4">Run the Example Design</h2><p>Firstly, create an input array that will be used as the input data for the Hough example design.</p><pre class="codeinput">inarray = uint8(fi(edge, 0, 1, 0));
+imshow(edge);
+</pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_02.png" alt=""> <h2 id="4">Run the Example Design</h2><p>Firstly, create an input array that will be used as the input data for the Hough example design.</p><pre class="codeinput">inarray = uint8(fi(edge, 0, 1, 0));
 
 <span class="comment">% Open the Line Hough Transform (LHT) example design and simulate to obtain</span>
 <span class="comment">% the Hough Parameter Space (HPS).</span>
 open_system(<span class="string">'pynq_hough_evaluation_model.slx'</span>);
-sim(<span class="string">'pynq_hough_evaluation_model.slx'</span>);
+out = sim(<span class="string">'pynq_hough_evaluation_model.slx'</span>);
 </pre><h2 id="5">Obtain the Simulation Results</h2><p>Calculate the maximum displacement and possible angles of orientation to plot the HPS.</p><pre class="codeinput">maxRho = ceil(sqrt((height/2)^2+(width/2)^2));
 theta = 0:dTheta:180-dTheta;
 
 <span class="comment">% Now, obtain the HPS and display.</span>
-A = reshape(simout, [maxRho*2, numel(theta)]);
+A = reshape(out.simout, [maxRho*2, numel(theta)]);
 plot3DHPS(A);
-</pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_03.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% PYNQ Hough Evaluation Platform Example Design
 % An example of using the PYNQ Hough Evaluation Platform (HEP) is
@@ -126,6 +127,7 @@ Y = rgb2gray(Ir);
 % Get the edge image by comparing the image gradient to the Sobel threshold
 % set earlier.
 [edge] = Sobel(Y, sobelThreshold);
+imshow(edge);
 
 %% Run the Example Design
 % Firstly, create an input array that will be used as the input data for
@@ -135,7 +137,7 @@ inarray = uint8(fi(edge, 0, 1, 0));
 % Open the Line Hough Transform (LHT) example design and simulate to obtain
 % the Hough Parameter Space (HPS).
 open_system('pynq_hough_evaluation_model.slx');
-sim('pynq_hough_evaluation_model.slx');
+out = sim('pynq_hough_evaluation_model.slx');
 
 %% Obtain the Simulation Results
 % Calculate the maximum displacement and possible angles of orientation to
@@ -144,7 +146,7 @@ maxRho = ceil(sqrt((height/2)^2+(width/2)^2));
 theta = 0:dTheta:180-dTheta;
 
 % Now, obtain the HPS and display.
-A = reshape(simout, [maxRho*2, numel(theta)]);
+A = reshape(out.simout, [maxRho*2, numel(theta)]);
 plot3DHPS(A);
 
 ##### SOURCE END #####

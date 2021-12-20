@@ -30,6 +30,7 @@ Y = rgb2gray(Ir);
 % Get the edge image by comparing the image gradient to the Sobel threshold
 % set earlier.
 [edge] = Sobel(Y, sobelThreshold);
+imshow(edge);
 
 %% Run the Example Design
 % Firstly, create an input array that will be used as the input data for
@@ -39,7 +40,7 @@ inarray = uint8(fi(edge, 0, 1, 0));
 % Open the Line Hough Transform (LHT) example design and simulate to obtain
 % the Hough Parameter Space (HPS).
 open_system('pynq_hough_evaluation_model.slx');
-sim('pynq_hough_evaluation_model.slx');
+out = sim('pynq_hough_evaluation_model.slx');
 
 %% Obtain the Simulation Results
 % Calculate the maximum displacement and possible angles of orientation to
@@ -48,5 +49,5 @@ maxRho = ceil(sqrt((height/2)^2+(width/2)^2));
 theta = 0:dTheta:180-dTheta;
 
 % Now, obtain the HPS and display.
-A = reshape(simout, [maxRho*2, numel(theta)]);
+A = reshape(out.simout, [maxRho*2, numel(theta)]);
 plot3DHPS(A);

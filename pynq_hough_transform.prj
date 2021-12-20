@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="1224585098" file="C:\GitHub\lht_framework\pynq_hough_transform.prj" location="C:\GitHub\lht_framework" name="pynq_hough_transform" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="1224585098" file="C:\GitHub\dn_thesis\Thesis\repos\lht_framework\pynq_hough_transform.prj" location="C:\GitHub\dn_thesis\Thesis\repos\lht_framework" name="pynq_hough_transform" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>PYNQ Hough Transform Support Package</param.appname>
     <param.authnamewatermark>David Northcote</param.authnamewatermark>
     <param.email>david.northcote@strath.ac.uk</param.email>
@@ -7,7 +7,7 @@
     <param.summary>HDL Coder reference design to generate Line Hough Transform architectures for the PYNQ software framework.</param.summary>
     <param.description />
     <param.screenshot />
-    <param.version>1.0</param.version>
+    <param.version>1.1</param.version>
     <param.output>${PROJECT_ROOT}\PYNQ Hough Transform Support Package.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -43,6 +43,7 @@
          &lt;file type="thumbnail"&gt;/example_designs/pynq_hough_evaluation/html/pynq_hough_evaluation_example_design.png&lt;/file&gt;
          &lt;file type="image"&gt;/example_designs/pynq_hough_evaluation/html/pynq_hough_evaluation_example_design_01.png&lt;/file&gt;
          &lt;file type="image"&gt;/example_designs/pynq_hough_evaluation/html/pynq_hough_evaluation_example_design_02.png&lt;/file&gt;
+         &lt;file type="image"&gt;/example_designs/pynq_hough_evaluation/html/pynq_hough_evaluation_example_design_03.png&lt;/file&gt;
       &lt;/example&gt;
    &lt;/exampleCategory&gt;
 &lt;/examples&gt;</param.examples>
@@ -73,7 +74,6 @@
     <unset>
       <param.description />
       <param.screenshot />
-      <param.version />
       <param.output />
       <param.products.name />
       <param.products.id />
@@ -113,7 +113,7 @@
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="PYNQ Hough Transform Support Package.mltbx" optional="false">C:\GitHub\lht_framework\PYNQ Hough Transform Support Package.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="PYNQ Hough Transform Support Package.mltbx" optional="false">C:\GitHub\dn_thesis\Thesis\repos\lht_framework\PYNQ Hough Transform Support Package.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>

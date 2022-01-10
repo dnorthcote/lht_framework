@@ -22,3 +22,7 @@ Y = rgb2gray(Ir);
 inarray = uint8(fi(edge, 0, 1, 0));
 
 hdlset_param(gcs, 'GenerateValidationModel', 'on');
+
+% Memory
+maxRho = ceil(sqrt((height/2)^2+(width/2)^2));
+bitsRho = ceil(log2(maxRho*2));

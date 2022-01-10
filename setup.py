@@ -8,7 +8,7 @@ from setuptools import find_packages, setup
 board = os.environ['BOARD']
 repo_board_folder = f'boards/{board}/lht_framework'
 board_notebooks_dir = os.environ['PYNQ_JUPYTER_NOTEBOOKS']
-board_project_dir = os.path.join(board_notebooks_dir, 'hough_evaluation_platform')
+board_project_dir = os.path.join(board_notebooks_dir, 'hep', 'default')
 
 # check whether board is supported
 def check_env():

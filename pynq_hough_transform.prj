@@ -1,12 +1,12 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="1224585098" file="C:\GitHub\dn_thesis\Thesis\repos\lht_framework\pynq_hough_transform.prj" location="C:\GitHub\dn_thesis\Thesis\repos\lht_framework" name="pynq_hough_transform" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="1680303820" file="C:\GitHub\dn_thesis\Thesis\repos\lht_framework\pynq_hough_transform.prj" location="C:\GitHub\dn_thesis\Thesis\repos\lht_framework" name="pynq_hough_transform" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>PYNQ Hough Transform Support Package</param.appname>
     <param.authnamewatermark>David Northcote</param.authnamewatermark>
     <param.email>david.northcote@strath.ac.uk</param.email>
     <param.company>The University of Strathclyde</param.company>
     <param.summary>HDL Coder reference design to generate Line Hough Transform architectures for the PYNQ software framework.</param.summary>
     <param.description />
-    <param.screenshot />
+    <param.screenshot>${PROJECT_ROOT}\hepRD\plotly_hps_surface.png</param.screenshot>
     <param.version>1.1</param.version>
     <param.output>${PROJECT_ROOT}\PYNQ Hough Transform Support Package.mltbx</param.output>
     <param.products.name />
@@ -44,6 +44,7 @@
          &lt;file type="image"&gt;/example_designs/pynq_hough_evaluation/html/pynq_hough_evaluation_example_design_01.png&lt;/file&gt;
          &lt;file type="image"&gt;/example_designs/pynq_hough_evaluation/html/pynq_hough_evaluation_example_design_02.png&lt;/file&gt;
          &lt;file type="image"&gt;/example_designs/pynq_hough_evaluation/html/pynq_hough_evaluation_example_design_03.png&lt;/file&gt;
+         &lt;file type="image"&gt;/example_designs/pynq_hough_evaluation/html/pynq_hough_evaluation_example_design_04.png&lt;/file&gt;
       &lt;/example&gt;
    &lt;/exampleCategory&gt;
 &lt;/examples&gt;</param.examples>
@@ -54,7 +55,7 @@
     <param.getting.started.guide />
     <param.matlabpath.excludes />
     <param.javaclasspath.excludes />
-    <param.exported.on.package>false</param.exported.on.package>
+    <param.exported.on.package>true</param.exported.on.package>
     <param.required.addons />
     <param.matlab.project.id />
     <param.matlab.project.name />
@@ -73,7 +74,6 @@
     <param.additional.sw.linux.url />
     <unset>
       <param.description />
-      <param.screenshot />
       <param.output />
       <param.products.name />
       <param.products.id />
@@ -87,7 +87,6 @@
       <param.getting.started.guide />
       <param.matlabpath.excludes />
       <param.javaclasspath.excludes />
-      <param.exported.on.package />
       <param.required.addons />
       <param.matlab.project.id />
       <param.matlab.project.name />
@@ -105,8 +104,8 @@
     <fileset.rootfiles>
       <file>${PROJECT_ROOT}\hepRD\demos.xml</file>
       <file>${PROJECT_ROOT}\hepRD\example_designs</file>
+      <file>${PROJECT_ROOT}\hepRD\plotly_hps_surface.png</file>
       <file>${PROJECT_ROOT}\hepRD\reference_designs</file>
-      <file>${PROJECT_ROOT}\hepRD\src</file>
       <file>${PROJECT_ROOT}\hepRD\templates</file>
     </fileset.rootfiles>
     <fileset.depfun.included />

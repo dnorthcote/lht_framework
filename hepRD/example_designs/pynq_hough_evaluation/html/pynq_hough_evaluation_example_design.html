@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>PYNQ Hough Evaluation Platform Example Design</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-20"><meta name="DC.source" content="pynq_hough_evaluation_example_design.m"><style type="text/css">
+      --><title>PYNQ Hough Evaluation Platform Example Design</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-01-10"><meta name="DC.source" content="pynq_hough_evaluation_example_design.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -72,7 +72,7 @@ width = 320;
 sobelThreshold = 30;
 dTheta = 1;
 dRho = 1;
-</pre><h2 id="2">Read in the Candidate Image and Resize</h2><p>Read in the candidate image, and resize according to the target height and width requirements of the architecture.</p><pre class="codeinput">I = imread(<span class="string">'roof.bmp'</span>);
+</pre><h2 id="2">Read in the Candidate Image and Resize</h2><p>Read in the candidate image, and resize according to the target height and width requirements of the architecture.</p><pre class="codeinput">I = imread(<span class="string">'chess.jpg'</span>);
 Ir = imresize(I, [height, width]);
 imshow(Ir);
 </pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_01.png" alt=""> <h2 id="3">Apply Sobel Edge Detection</h2><p>Obtain the greyscale image as preprocessing step for Sobel edge detection.</p><pre class="codeinput">Y = rgb2gray(Ir);
@@ -87,13 +87,13 @@ imshow(edge);
 <span class="comment">% the Hough Parameter Space (HPS).</span>
 open_system(<span class="string">'pynq_hough_evaluation_model.slx'</span>);
 out = sim(<span class="string">'pynq_hough_evaluation_model.slx'</span>);
-</pre><h2 id="5">Obtain the Simulation Results</h2><p>Calculate the maximum displacement and possible angles of orientation to plot the HPS.</p><pre class="codeinput">maxRho = ceil(sqrt((height/2)^2+(width/2)^2));
+</pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_03.png" alt=""> <h2 id="5">Obtain the Simulation Results</h2><p>Calculate the maximum displacement and possible angles of orientation to plot the HPS.</p><pre class="codeinput">maxRho = ceil(sqrt((height/2)^2+(width/2)^2));
 theta = 0:dTheta:180-dTheta;
 
 <span class="comment">% Now, obtain the HPS and display.</span>
 A = reshape(out.simout, [maxRho*2, numel(theta)]);
 plot3DHPS(A);
-</pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_03.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_04.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% PYNQ Hough Evaluation Platform Example Design
 % An example of using the PYNQ Hough Evaluation Platform (HEP) is
@@ -115,7 +115,7 @@ dRho = 1;
 %% Read in the Candidate Image and Resize
 % Read in the candidate image, and resize according to the target height
 % and width requirements of the architecture.
-I = imread('roof.bmp');
+I = imread('chess.jpg');
 Ir = imresize(I, [height, width]);
 imshow(Ir);
 

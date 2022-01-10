@@ -9,7 +9,7 @@ dTheta = 1;
 dRho = 1;
 
 % Read in image and resize
-I = imread('../images/roof.bmp');
+I = imread('chess.jpg');
 Ir = imresize(I, [height, width]);
 
 % Get greyscale

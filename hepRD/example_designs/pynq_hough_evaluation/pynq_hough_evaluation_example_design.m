@@ -18,7 +18,7 @@ dRho = 1;
 %% Read in the Candidate Image and Resize
 % Read in the candidate image, and resize according to the target height
 % and width requirements of the architecture.
-I = imread('roof.bmp');
+I = imread('chess.jpg');
 Ir = imresize(I, [height, width]);
 imshow(Ir);
 

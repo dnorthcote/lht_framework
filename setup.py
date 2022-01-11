@@ -23,7 +23,7 @@ def check_path():
 # copy overlays to python package
 def copy_overlays():
     src_ol_dir = os.path.join(repo_board_folder, 'bitstream')
-    dst_ol_dir = os.path.join(board_project_dir, 'bitstream')
+    dst_ol_dir = os.path.join(board_project_dir)
     copy_tree(src_ol_dir, dst_ol_dir)
 
 # copy notebooks to jupyter home

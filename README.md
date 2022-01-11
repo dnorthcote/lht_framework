@@ -13,7 +13,7 @@ The HEP uses a Mathworks' HDL Coder reference design for the rapid prototyping a
 
 This repository is compatible with [PYNQ Image v2.7](https://github.com/Xilinx/PYNQ/releases) for the [ZCU104](https://www.xilinx.com/products/boards-and-kits/zcu104.html) development board.
 
-The example notebook can be found [here](https://nbviewer.jupyter.org/github/dnorthcote/lht_framework/blob/master/boards/ZCU104/lht_framework/notebooks/Hough%20Evaluation%20Platform.ipynb), although, there will be no interactivity as it must be used on the Zynq MPSoC device.
+The example notebook can be found [here](https://nbviewer.jupyter.org/github/dnorthcote/lht_framework/blob/master/boards/ZCU104/lht_framework/notebooks/hough-evaluation-platform.ipynb), although, there will be no interactivity as it must be used on the Zynq MPSoC device.
 
 ## Quick Start
 The following steps will open a demonstration notebook for the HEP, which analyses an FPGA architecture that applies the LHT to an of 1920x1080 pixels.

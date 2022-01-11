@@ -1,0 +1,153 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PYNQ Hough Evaluation Platform Example Design</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-01-10"><meta name="DC.source" content="pynq_hough_evaluation_example_design.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>PYNQ Hough Evaluation Platform Example Design</h1><!--introduction--><p>An example of using the PYNQ Hough Evaluation Platform (HEP) is demonstrated using an architecture design of the Line Hough Transform. This design is specifically for Xilinx FPGAs and targets the ZCU104 development board.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Set Design Parameters</a></li><li><a href="#2">Read in the Candidate Image and Resize</a></li><li><a href="#3">Apply Sobel Edge Detection</a></li><li><a href="#4">Run the Example Design</a></li><li><a href="#5">Obtain the Simulation Results</a></li></ul></div><h2 id="1">Set Design Parameters</h2><p>Firstly, set the height and width of the candidate image. Next, the Sobel threshold is used to determine resulting edge pixels. The threshold should be set between 0 and 255. Finally, initialise the \theta and \rho discretisation steps.</p><pre class="codeinput">height = 240;
+width = 320;
+sobelThreshold = 30;
+dTheta = 1;
+dRho = 1;
+</pre><h2 id="2">Read in the Candidate Image and Resize</h2><p>Read in the candidate image, and resize according to the target height and width requirements of the architecture.</p><pre class="codeinput">I = imread(<span class="string">'chess.jpg'</span>);
+Ir = imresize(I, [height, width]);
+imshow(Ir);
+</pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_01.png" alt=""> <h2 id="3">Apply Sobel Edge Detection</h2><p>Obtain the greyscale image as preprocessing step for Sobel edge detection.</p><pre class="codeinput">Y = rgb2gray(Ir);
+
+<span class="comment">% Get the edge image by comparing the image gradient to the Sobel threshold</span>
+<span class="comment">% set earlier.</span>
+[edge] = Sobel(Y, sobelThreshold);
+imshow(edge);
+</pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_02.png" alt=""> <h2 id="4">Run the Example Design</h2><p>Firstly, create an input array that will be used as the input data for the Hough example design.</p><pre class="codeinput">inarray = uint8(fi(edge, 0, 1, 0));
+
+<span class="comment">% Open the Line Hough Transform (LHT) example design and simulate to obtain</span>
+<span class="comment">% the Hough Parameter Space (HPS).</span>
+open_system(<span class="string">'pynq_hough_evaluation_model.slx'</span>);
+out = sim(<span class="string">'pynq_hough_evaluation_model.slx'</span>);
+</pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_03.png" alt=""> <h2 id="5">Obtain the Simulation Results</h2><p>Calculate the maximum displacement and possible angles of orientation to plot the HPS.</p><pre class="codeinput">maxRho = ceil(sqrt((height/2)^2+(width/2)^2));
+theta = 0:dTheta:180-dTheta;
+
+<span class="comment">% Now, obtain the HPS and display.</span>
+A = reshape(out.simout, [maxRho*2, numel(theta)]);
+plot3DHPS(A);
+</pre><img vspace="5" hspace="5" src="pynq_hough_evaluation_example_design_04.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% PYNQ Hough Evaluation Platform Example Design
+% An example of using the PYNQ Hough Evaluation Platform (HEP) is
+% demonstrated using an architecture design of the Line Hough Transform.
+% This design is specifically for Xilinx FPGAs and targets the ZCU104
+% development board.
+
+%% Set Design Parameters
+% Firstly, set the height and width of the candidate image. Next, the Sobel
+% threshold is used to determine resulting edge pixels. The threshold
+% should be set between 0 and 255. Finally, initialise the \theta and \rho
+% discretisation steps.
+height = 240;
+width = 320;
+sobelThreshold = 30;
+dTheta = 1;
+dRho = 1;
+
+%% Read in the Candidate Image and Resize
+% Read in the candidate image, and resize according to the target height
+% and width requirements of the architecture.
+I = imread('chess.jpg');
+Ir = imresize(I, [height, width]);
+imshow(Ir);
+
+%% Apply Sobel Edge Detection
+% Obtain the greyscale image as preprocessing step for Sobel edge
+% detection.
+Y = rgb2gray(Ir);
+
+% Get the edge image by comparing the image gradient to the Sobel threshold
+% set earlier.
+[edge] = Sobel(Y, sobelThreshold);
+imshow(edge);
+
+%% Run the Example Design
+% Firstly, create an input array that will be used as the input data for
+% the Hough example design.
+inarray = uint8(fi(edge, 0, 1, 0));
+
+% Open the Line Hough Transform (LHT) example design and simulate to obtain
+% the Hough Parameter Space (HPS).
+open_system('pynq_hough_evaluation_model.slx');
+out = sim('pynq_hough_evaluation_model.slx');
+
+%% Obtain the Simulation Results
+% Calculate the maximum displacement and possible angles of orientation to
+% plot the HPS.
+maxRho = ceil(sqrt((height/2)^2+(width/2)^2));
+theta = 0:dTheta:180-dTheta;
+
+% Now, obtain the HPS and display.
+A = reshape(out.simout, [maxRho*2, numel(theta)]);
+plot3DHPS(A);
+
+##### SOURCE END #####
+--></body></html>

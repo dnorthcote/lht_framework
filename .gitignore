@@ -1,7 +1,32 @@
+# Ignore Other
+*.htm
+.ipynb_checkpoints
+.idea
 
+# Ignore Logs
+*.log
+
+# Ignore Simulink Files
+*.autosave
+*.asv
+*.slxc
+*\.hbs
+*\.Xil
 *\hdl_prj
 *\slprj
-*.asv
-*.log
+*\wavedata
+*\netlist
+
+# Ignore Vivado Files
 *.jou
-*.slxc
+*vivado.txt
+*vivado.jou
+*vivado.log
+
+# Ignore ./lht_framework/lht_framework/
+**/lht_framework/lht_framework
+
+# Ignore ./workspace
+*\workspace
+*.r2019a
+*.mltbx

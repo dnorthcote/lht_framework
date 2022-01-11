@@ -8,7 +8,7 @@ from setuptools import find_packages, setup
 board = os.environ['BOARD']
 repo_board_folder = f'boards/{board}/lht_framework'
 board_notebooks_dir = os.environ['PYNQ_JUPYTER_NOTEBOOKS']
-board_project_dir = os.path.join(board_notebooks_dir, 'hough_evaluation_platform')
+board_project_dir = os.path.join(board_notebooks_dir, 'hep', 'default')
 
 # check whether board is supported
 def check_env():
@@ -23,7 +23,7 @@ def check_path():
 # copy overlays to python package
 def copy_overlays():
     src_ol_dir = os.path.join(repo_board_folder, 'bitstream')
-    dst_ol_dir = os.path.join(board_project_dir, 'bitstream')
+    dst_ol_dir = os.path.join(board_project_dir)
     copy_tree(src_ol_dir, dst_ol_dir)
 
 # copy notebooks to jupyter home
@@ -39,9 +39,9 @@ copy_notebooks()
 
 setup(
     name="lht_framework",
-    version='1.0',
+    version='1.2',
     install_requires=[
-        'pynq>=2.5',
+        'pynq>=2.7',
     ],
     url='https://github.com/dnorthcote/lht_framework',
     license='BSD 3-Clause License',

@@ -75,6 +75,10 @@ class HoughEvaluation(Overlay):
     @property
     def dtheta(self):
         return self._dtheta
+    
+    @property
+    def time(self):
+        return self._time
         
     def imread(self, imgfile_name='chessboard.jpg'):
         """Returns an image resized to the architecture requirements.
@@ -89,7 +93,7 @@ class HoughEvaluation(Overlay):
         """
         return cv2.cvtColor(rgb, cv2.COLOR_BGR2GRAY)
     
-    def sobeledge(self, grey, threshold):
+    def sobel_edge(self, grey, threshold):
         """Returns the Sobel edge image.
         grey: A greyscale image to undergo edge detection.
         threshold: The edge detector threshold for segmentation.
@@ -106,7 +110,7 @@ class HoughEvaluation(Overlay):
                                   255, cv2.THRESH_BINARY)
         return edge
     
-    def houghlines(self, edge):
+    def hough_lines(self, edge):
         """Returns the HPS for an input edge image.
         edge: The input edge image.
         """
@@ -116,12 +120,12 @@ class HoughEvaluation(Overlay):
         self.axi_dma.sendchannel.transfer(self._inarray)
         self.axi_dma.sendchannel.wait()
         self.axi_dma.recvchannel.wait()
-        self.time = self.hpa.clock_cycles/self.frequency
+        self._time = self.hpa.clock_cycles/self.frequency
         self.hpa.reset = 1
         self.hpa.reset = 0
         return np.array(self._outarray, dtype=np.uint32)
     
-    def plotSurface(self, hps):
+    def plot_surface(self, hps):
         """Returns a plotly figure handle of the HPS surface.
         hps: The HPS to be plotted.
         """
@@ -152,7 +156,7 @@ class HoughEvaluation(Overlay):
         py.offline.iplot(fig)
         return fig
     
-    def plotHeatmap(self, hps):
+    def plot_heatmap(self, hps):
         """Returns a plotly figure handle of the HPS heatmap.
         hps: The HPS to be plotted.
         """
@@ -181,7 +185,7 @@ class HoughEvaluation(Overlay):
         py.offline.iplot(fig)
         return fig
     
-    def pmvr(self, hps):
+    def get_pmvr(self, hps):
         """Returns the PMVR of a given hps.
         hps: The HPS to be analysed.
         """

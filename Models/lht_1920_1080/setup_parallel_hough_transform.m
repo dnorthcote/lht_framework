@@ -1,6 +1,9 @@
 % Clear workspace
 clc; clear; close all;
 
+% System Parameters
+fclk = 205e6;
+
 % Set parameters
 height = 1080;
 width = 1920;

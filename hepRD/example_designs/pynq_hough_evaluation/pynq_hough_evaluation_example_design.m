@@ -18,7 +18,8 @@ dRho = 1;
 %% Read in the Candidate Image and Resize
 % Read in the candidate image, and resize according to the target height
 % and width requirements of the architecture.
-I = imread('chess.jpg');
+imageAddr = 'chess.jpg';
+I = imread(imageAddr);
 Ir = imresize(I, [height, width]);
 imshow(Ir);
 
@@ -50,4 +51,37 @@ theta = 0:dTheta:180-dTheta;
 
 % Now, obtain the HPS and display.
 A = reshape(out.simout, [maxRho*2, numel(theta)]);
-plot3DHPS(A);
+%plot3DHPS(A);
+
+%% Compare the Simulation Results with MATLAB Model
+Am = LineHoughTransform(edge);
+compare = min(Am(:) == A(:));
+if compare
+    fprintf(2, 'Simulation and software model are the same.\n');
+    
+else
+    fprintf(2, 'Simulation and software model are different.\n');
+end
+
+%% Save output images
+imageName = strsplit(imageAddr, '.');
+imageName = string(imageName(1));
+[~,~,~] = mkdir('output');
+
+% Edge Image
+imwrite(edge, strcat('output/', imageName, '_edge', '.jpg'));
+
+% HPS Plot
+mesh = plot3DHPS(A);
+fontsize = 10;
+set(gca, "FontSize", fontsize)
+xlabel("\theta", "FontSize", fontsize+4);
+ylabel("\rho", "FontSize", fontsize+4);
+zlabel("Votes", "FontSize", fontsize);
+set(gcf, 'Position',  [0, 0, 400, 400])
+
+% Save Isometric View
+title("HPS of Chess Set (isometric view)", "FontSize", fontsize);
+%view(-37.5, 30) % Default Iso
+saveas(gcf, "complex_vote_accumulation_chess_hps_isometric.eps", "epsc"); 
+

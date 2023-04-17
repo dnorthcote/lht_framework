@@ -1,14 +1,11 @@
-function plot3DHPS( HPS )
+function hps = plot3DHPS( HPS )
 
 [maxRho, maxTheta] = size(HPS);
-xSize = 1:(maxRho);
+xSize = floor(-maxRho/2):floor(maxRho/2)-1;
 ySize = 1:(maxTheta);
 [xx, yy] = meshgrid(ySize, xSize);
-figure; mesh(xx, yy, HPS);
-xlabel('Orientation (\theta)');
-ylabel('Magnitude (\rho)');
-zlabel('Votes');
-title('Hough Parameter Space');
+figure; hps = mesh(xx, yy, HPS);
+xlim([1 maxTheta]);
+ylim([floor(-maxRho/2) floor(maxRho/2)]);
 
 end
-

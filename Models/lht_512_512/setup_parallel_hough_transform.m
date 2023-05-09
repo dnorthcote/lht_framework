@@ -1,16 +1,15 @@
 % Clear workspace
 clc; clear; close all;
 
-fs = 250e6;
+% System Parameters
+fclk = 250e6;
 
 % Set parameters
-height = 480;
-width = 640;
-sobelThreshold = 100;
+height = 512;
+width = 512;
+sobelThreshold = 30;
 dTheta = 1;
 dRho = 1;
-Ntheta = 180;
-theta = (0:dTheta:(Ntheta-1)*dTheta);
 
 % Read in image and resize
 I = imread('chess.jpg');
@@ -23,15 +22,10 @@ Y = rgb2gray(Ir);
 [edge] = Sobel(Y, sobelThreshold);
 
 % Create input array
-inarray = Y;
+inarray = uint8(fi(edge, 0, 1, 0));
 
-%hdlset_param(gcs, 'GenerateValidationModel', 'on');
+hdlset_param(gcs, 'GenerateValidationModel', 'on');
 
 % Memory
 maxRho = ceil(sqrt((height/2)^2+(width/2)^2));
-Nrho = maxRho*2/dRho;
 bitsRho = ceil(log2(maxRho*2));
-
-% ARLHT
-Ktheta = 4;
-gamma = (theta(end)+dTheta)/Ktheta;

@@ -12,7 +12,7 @@
 *.slxc
 *\.hbs
 *\.Xil
-*\hdl_prj
+*\hdl_prj*
 *\slprj
 *\wavedata
 *\netlist

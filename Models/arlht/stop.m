@@ -1,4 +1,4 @@
-[hps, Aopt, rbm] = ARLHT(edge, dirNew, 1, 1, 0, 4);
+[hps, Aopt, rbm] = ARLHT(edge, dirNew, dTheta, 1, 0, 4);
 %hpsThresh = max(hps(:))*0.6;
 %hps(hps<hpsThresh) = 0;
 plot3DHPS(hps);

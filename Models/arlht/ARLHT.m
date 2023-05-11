@@ -81,7 +81,7 @@ B = zeros(n, m);
 subflag = ~mod(m, 2)*(lambda~=0);
 
 % Get the angular length
-K = floor(((thetaMax+dTheta)/regions)/dTheta);
+K = floor(((thetaMax+dTheta)/regions));
 
 % Get the index length for the optimised HPS.
 mr = m/regions;
@@ -102,7 +102,7 @@ for y = 1:height
             
             % Get the index of the gradient orientation in relation to the
             % operational range of theta
-            g_idx = floor(Gdir(y,x)/dTheta)+1;
+            g_idx = round(Gdir(y,x)/dTheta)+1;
                         
             % Iterate across values of theta around gradient theta
             for i = g_idx-lambda:1:g_idx+lambda-subflag
@@ -127,7 +127,7 @@ for y = 1:height
                 
                 % Get the adjusted orientation for voting
                 aTheta = theta_i - floor(theta_i/K)*K;
-                a_idx = floor(aTheta/dTheta)+1;
+                a_idx = round(aTheta/dTheta)+1;
 
                 % Apply vote to HPS
                 A(rho, a_idx) = A(rho, a_idx) + 1;
@@ -146,7 +146,7 @@ end
 %Reconstruct the accumulator array using the optimised HPS and the RBM.
 %Start by applying a morphological opening to the RBM.
 if regions > 1
-    Bopen = bwmorph(B, 'open');
+    Bopen = imdilate(imerode(B, ones(3)), ones(3));
 else
     Bopen = B;
 end

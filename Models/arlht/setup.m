@@ -1,11 +1,11 @@
 % Clear workspace
 clc; clear; close all;
 
-fs = 175e6;
+fs = 250e6;
 
 % Set parameters
-height = 1080;
-width = 1920;
+height = 512;
+width = 512;
 sobelThreshold = 30;
 theta = (0:1:179);
 

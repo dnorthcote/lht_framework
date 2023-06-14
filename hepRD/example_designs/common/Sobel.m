@@ -23,7 +23,6 @@ dir = rad2deg(atan(Gy./Gx));
 %Get edge image and correct orientation
 for i = 1:height
     for j = 1:width
-        mag(i,j) = mag(i,j)*2^(-2);
         % Compare with the threshold and derive the edge image
         if mag(i,j) >= T
             edge(i,j) = 1;
@@ -48,4 +47,3 @@ Gdir = double(dir);
 edge = double(edge);
 
 end
-

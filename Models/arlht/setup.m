@@ -22,7 +22,7 @@ Ir = imresize(I, [height, width]);
 Y = rgb2gray(Ir);
 
 % Get Sobel and Gradient
-[edge, dir, mag] = SobelEdge(Y, 100);
+[edge, dir, mag] = Sobel(Y, 100);
 dirNew = floor(dir);
 simDirNew = dirNew;
 simDirNew(edge==0) = 255;

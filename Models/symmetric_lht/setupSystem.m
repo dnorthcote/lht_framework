@@ -3,7 +3,7 @@ name = {'720', '768', '600', '512', '334', '240'};
 status = ones(1, length(name));
 heightName = [720, 768, 600, 512, 334, 240];
 widthName = [1280, 1024, 800, 512, 334, 320];
-fclk = [225, 225, 230, 250, 250, 250];
+fclk = [235, 235, 250, 250, 250, 250];
 
 I = imread('chess.jpg');
 sobelThreshold = 100;
@@ -39,14 +39,14 @@ for nameIdx = 1:length(name)
     % Create input array
     inarray = uint8(simDirNew);
     
-    set_param('symmetric_lht', 'SimulationCommand', 'update');
-    
     % Set model params
     memBlock = strcat('symmetric_lht', ...
         '/DUT/Symmetric Hough Accumulator/Symmetric Accumulator/', ...
         'Symmetric Memory/Simple Dual Port RAM Generator');
     set_param(memBlock, 'b', int2str(eval('ceil(log2(maxRho*2))*2')));
     set_param(memBlock, 'd', int2str(eval('maxRho*2')));
+    
+    set_param('symmetric_lht', 'SimulationCommand', 'update');
     
     %% Set Model 'symmetric_lht' HDL parameters
     hdlset_param('symmetric_lht', 'HDLSubsystem', 'symmetric_lht/DUT');
